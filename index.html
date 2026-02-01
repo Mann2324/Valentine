@@ -1,150 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Khushi 💕</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ff9a9e, #fecfef);
-      font-family: 'Poppins', Arial, sans-serif;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>Khushi 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    /* Floating hearts background */
-    .heart {
-      position: absolute;
-      bottom: -50px;
-      color: rgba(255, 105, 180, 0.7);
-      animation: floatUp linear infinite;
-      pointer-events: none;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #fbd3e9, #fceef5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
 
-    @keyframes floatUp {
-      from {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-110vh) scale(1.4);
-        opacity: 0;
-      }
-    }
+  .box {
+    background: #fff;
+    width: 320px;
+    padding: 30px 20px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
+    position: relative;
+  }
 
-    .card {
-      background: #fff0f5;
-      padding: 45px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 25px 50px rgba(255, 105, 180, 0.35);
-      position: relative;
-      z-index: 10;
-    }
+  .emoji {
+    font-size: 64px;
+    margin-bottom: 10px;
+  }
 
-    h1 {
-      color: #ff2f92;
-      margin-bottom: 10px;
-    }
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 30px;
+  }
 
-    h2 {
-      color: #ff5fa2;
-      font-weight: normal;
-      margin-bottom: 30px;
-    }
+  .yes {
+    background: #ff3b8d;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 36px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 59, 141, 0.4);
+  }
 
-    button {
-      padding: 14px 34px;
-      font-size: 18px;
-      border: none;
-      border-radius: 40px;
-      cursor: pointer;
-      margin: 10px;
-      transition: transform 0.2s;
-    }
+  .no {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #777;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    #yesBtn {
-      background: linear-gradient(135deg, #ff2f92, #ff7eb3);
-      color: white;
-      box-shadow: 0 10px 20px rgba(255, 47, 146, 0.4);
-    }
-
-    #noBtn {
-      background: #ffd6e8;
-      color: #ff2f92;
-      position: absolute;
-    }
-  </style>
+  .hint {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 40px;
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Khushi 💕</h1>
-    <h2>Will you be my Valentine?</h2>
+<div class="box">
+  <div class="emoji">🐱💗</div>
+  <h2>Khushi will you be my valentine?</h2>
 
-    <button id="yesBtn">Yes 💖</button>
-    <button id="noBtn">No 🙈</button>
-  </div>
+  <button class="yes" onclick="yesClicked()">Yes</button>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
+  <div class="no" id="noBtn">No</div>
 
-    // Runaway NO button 😈
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
+  <div class="hint">"No" seems a bit shy 😳</div>
+</div>
 
-    // Floating hearts generator 💗
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💖";
+<script>
+  const noBtn = document.getElementById("noBtn");
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (20 + Math.random() * 30) + "px";
-      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+  noBtn.addEventListener("mouseover", () => {
+    const box = document.querySelector(".box");
+    const x = Math.random() * (box.offsetWidth - 60);
+    const y = Math.random() * (box.offsetHeight - 30);
 
-      document.body.appendChild(heart);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
 
-      setTimeout(() => {
-        heart.remove();
-      }, 8000);
-    }
-
-    setInterval(createHeart, 400);
-
-    // YES click 💘
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = `
-        <div style="
-          height:100vh;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          flex-direction:column;
-          background:linear-gradient(135deg,#ff9a9e,#fecfef);
-          color:white;
-          font-family:Poppins, Arial;
-          text-align:center;
-        ">
-          <h1 style="font-size:48px;">Yay Khushi! 💖🥰</h1>
-          <h2>You just made my heart yours 💕</h2>
-          <div style="font-size:36px;">💗 💖 💞 💓 💘</div>
-        </div>
-      `;
-    });
-  </script>
+  function yesClicked() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        background:linear-gradient(180deg,#fbd3e9,#fceef5);
+        font-family:-apple-system;
+        text-align:center;
+      ">
+        <div style="font-size:70px;">💖🥰</div>
+        <h1 style="color:#ff3b8d;">Yay Khushi!</h1>
+        <p style="font-size:18px;">Best Valentine ever 💗</p>
+      </div>
+    `;
+  }
+</script>
 
 </body>
 </html>
