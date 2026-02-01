@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>khushi 💗</title>
+<title>Khushi 💗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -17,27 +17,6 @@
     overflow: hidden;
   }
 
-  /* Floating hearts animation */
-  .heart {
-    position: absolute;
-    bottom: -20px;
-    font-size: 24px;
-    animation: floatUp linear infinite;
-    opacity: 0.7;
-  }
-
-  @keyframes floatUp {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-110vh);
-      opacity: 0;
-    }
-  }
-
-  /* Card animation */
   .box {
     background: #fff;
     width: 320px;
@@ -46,7 +25,7 @@
     text-align: center;
     box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
     position: relative;
-    animation: pop 0.8s ease;
+    animation: pop 0.7s ease;
     z-index: 10;
   }
 
@@ -63,7 +42,6 @@
   h2 {
     font-size: 20px;
     font-weight: 500;
-    color: #222;
     margin-bottom: 30px;
   }
 
@@ -78,24 +56,41 @@
     box-shadow: 0 10px 20px rgba(255, 59, 141, 0.4);
   }
 
-  /* NO button with background */
   .no {
-    margin-top: 15px;
-    font-size: 14px;
     background: #ffd6e8;
     color: #ff3b8d;
     padding: 6px 16px;
     border-radius: 20px;
+    font-size: 14px;
     cursor: pointer;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    margin-top: 12px;
   }
 
   .hint {
     font-size: 12px;
     color: #aaa;
-    margin-top: 50px;
+    margin-top: 45px;
+  }
+
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    animation: confetti 2s linear forwards;
+  }
+
+  @keyframes confetti {
+    from {
+      transform: translateY(0) rotate(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(600px) rotate(720deg);
+      opacity: 0;
+    }
   }
 </style>
 </head>
@@ -104,9 +99,9 @@
 
 <div class="box">
   <div class="emoji">🐱💗</div>
-  <h2>khushi, will you be my Valentine?</h2>
+  <h2>Khushi, will you be my Valentine?</h2>
 
-  <button class="yes" onclick="yesClicked()">Yes</button>
+  <button class="yes" onclick="celebrate()">Yes</button>
   <div class="no" id="noBtn">No</div>
 
   <div class="hint">"No" seems a bit shy 😳</div>
@@ -115,46 +110,42 @@
 <script>
   const noBtn = document.getElementById("noBtn");
 
-  // Shy NO button
   noBtn.addEventListener("mouseover", () => {
     const box = document.querySelector(".box");
-    const x = Math.random() * (box.offsetWidth - 80);
-    const y = Math.random() * (box.offsetHeight - 40);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = Math.random() * (box.offsetWidth - 80) + "px";
+    noBtn.style.top = Math.random() * (box.offsetHeight - 40) + "px";
   });
 
-  // Floating hearts
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-    document.body.appendChild(heart);
+  function celebrate() {
+    for (let i = 0; i < 120; i++) {
+      const conf = document.createElement("div");
+      conf.className = "confetti";
+      conf.style.left = Math.random() * window.innerWidth + "px";
+      conf.style.top = "-10px";
+      conf.style.background =
+        ["#ff3b8d", "#ffd6e8", "#ff9acb", "#ffc0dc"][Math.floor(Math.random() * 4)];
+      conf.style.animationDuration = (1.5 + Math.random()) + "s";
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 2500);
+    }
 
-    setTimeout(() => heart.remove(), 8000);
-  }
-
-  setInterval(createHeart, 500);
-
-  function yesClicked() {
-    document.body.innerHTML = `
-      <div style="
-        height:100vh;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        background:linear-gradient(180deg,#fbd3e9,#fceef5);
-        font-family:-apple-system;
-        text-align:center;
-      ">
-        <div style="font-size:70px;">💖🥰</div>
-        <h1 style="color:#ff3b8d;">Yay Khushi!</h1>
-        <p style="font-size:18px;">You just made my day 💗</p>
-      </div>
-    `;
+    setTimeout(() => {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+          background:linear-gradient(180deg,#fbd3e9,#fceef5);
+          text-align:center;
+        ">
+          <div style="font-size:70px;">🎉💖</div>
+          <h1>YAY!!!</h1>
+          <h2>Khushi said YES 💕</h2>
+        </div>
+      `;
+    }, 600);
   }
 </script>
 
